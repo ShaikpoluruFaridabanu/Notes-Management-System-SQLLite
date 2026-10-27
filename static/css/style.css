@@ -1,0 +1,63 @@
+/* ===== Base ===== */
+:root { --safe-b: env(safe-area-inset-bottom, 0px); }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  font-size: clamp(.95rem, .9rem + .2vw, 1.05rem);
+  overflow-x: hidden;
+}
+img, svg, video { max-width: 100%; height: auto; }
+
+/* ===== Navbar ===== */
+.navbar { padding-top: max(.5rem, env(safe-area-inset-top, 0px)); }
+.navbar-brand { font-weight: 600; letter-spacing: .3px; font-size: clamp(1.05rem, 1rem + .5vw, 1.25rem); }
+.nav-greeting { max-width: 100%; }
+@media (min-width: 768px) { .nav-greeting { max-width: 160px; } }
+@media (max-width: 767.98px) {
+  .nav-actions { padding-bottom: .5rem; }
+  .nav-actions .btn { padding: .6rem 1rem; font-size: 1rem; }   /* big touch targets */
+  .nav-greeting { padding: 0 .25rem; }
+}
+
+/* ===== Layout ===== */
+main.container-xl { padding-left: max(.75rem, env(safe-area-inset-left, 0px)); padding-right: max(.75rem, env(safe-area-inset-right, 0px)); }
+.page-head h4 { font-size: clamp(1.15rem, 1rem + 1vw, 1.5rem); }
+@media (max-width: 400px) { .page-head .btn { width: 100%; } }
+
+/* ===== Cards ===== */
+.card { border: 0; border-radius: 12px; }
+.note-card { transition: transform .15s ease, box-shadow .15s ease; }
+.note-card:hover { transform: translateY(-4px); box-shadow: 0 .6rem 1.2rem rgba(0,0,0,.12) !important; }
+@media (hover: none) { .note-card:hover { transform: none; box-shadow: var(--bs-box-shadow-sm) !important; } }
+.note-title { word-break: break-word; overflow-wrap: anywhere; }
+.note-text { white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; }
+.note-actions form { margin: 0; }
+
+/* ===== Forms ===== */
+.form-control, .form-select { font-size: 1rem; }              /* prevents iOS zoom on focus */
+@media (max-width: 767.98px) {
+  .form-control { padding: .65rem .8rem; }
+  .btn:not(.btn-sm) { padding-top: .65rem; padding-bottom: .65rem; }
+}
+.note-editor { min-height: 40vh; resize: vertical; }
+@media (min-width: 992px) { .note-editor { min-height: 50vh; } }
+.auth-links a { display: inline-block; padding: .25rem 0; }
+
+/* Touch-friendly small buttons on phones/tablets */
+@media (pointer: coarse) {
+  .note-actions .btn-sm { padding: .45rem .9rem; font-size: .9rem; }
+}
+
+/* ===== Footer ===== */
+footer { font-size: .9rem; padding-bottom: calc(1rem + var(--safe-b)) !important; }
+
+/* ===== Small phones ===== */
+@media (max-width: 360px) {
+  .card-body { padding: .85rem; }
+  .navbar-brand { font-size: 1rem; }
+}
+
+/* ===== Respect reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .note-card { transition: none; }
+}

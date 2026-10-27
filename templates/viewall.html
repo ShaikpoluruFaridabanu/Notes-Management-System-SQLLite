@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}My Notes{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">My Notes</h4>
+  <a class="btn btn-primary" href="{{ url_for('addnote') }}">+ New Note</a>
+</div>
+{% if notes %}
+<div class="row g-3">
+  {% for n in notes %}
+  <div class="col-12 col-sm-6 col-lg-4"><div class="card note-card h-100 shadow-sm"><div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ n.title }}</h5>
+    <p class="card-text text-muted small flex-grow-1">{{ (n.content or '')[:120] }}{% if n.content and n.content|length > 120 %}…{% endif %}</p>
+    <div class="small text-muted mb-2">{{ n.created_at }}</div>
+    <div class="d-flex gap-2">
+      <a class="btn btn-sm btn-primary" href="{{ url_for('viewnotes', note_id=n.id) }}">View</a>
+      <a class="btn btn-sm btn-warning" href="{{ url_for('updatenote', note_id=n.id) }}">Edit</a>
+      <form method="post" action="{{ url_for('deletenote', note_id=n.id) }}" onsubmit="return confirm('Delete this note?');">
+        <button class="btn btn-sm btn-danger">Delete</button>
+      </form>
+    </div>
+  </div></div></div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">No notes yet. Click “New Note” to add your first one.</div>
+{% endif %}
+{% endblock %}
+
